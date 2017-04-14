@@ -6,8 +6,6 @@ services:
     restart: always
     volumes:
       - "db-data:/var/lib/postgresql/data"
-    networks:
-      - default
 
   app:
     image: klaxon
@@ -20,19 +18,9 @@ services:
       - db
     restart: always
     ports:
-      - "80:80"
-      - "443:443"
-      - "3000:3000"
-      - "3001:3001"
-      - "3004:3004"
-    networks:
-      - default
-      - proxy
+      - 80:3000
+      - 443:3000
 
 volumes:
   db-data:
     driver: local
-
-networks:
-  proxy:
-    external: true
