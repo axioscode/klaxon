@@ -11,7 +11,7 @@ class AppSetting < ActiveRecord::Base
   def self.set_default_host(host)
     setting = self.where(key: self.default_host_key).first_or_initialize
     puts "Setting default_host to #{host}"
-    setting.value = host
+    setting.value = ENV["DEFAULT_HOST"] || host
     setting.save
 
     Rails.application.routes.default_url_options[:host] = host
